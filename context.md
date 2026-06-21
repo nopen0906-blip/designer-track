@@ -3,7 +3,7 @@
 This file provides the global context and current state of the repository for AI agents.
 
 ## Project Overview
-- **Name:** Website (Designer Tract)
+- **Name:** Website (Designer Track)
 - **Framework/Tech Stack:** React (Vite) + `react-router-dom` (routes: `/` Home, `/work` full portfolio). `framer-motion` powers the motion layer: 3D hero text (`InteractiveText`), scroll-parallax images (`ParallaxImage`), magnetic CTAs (`MagneticButton`), count-up stats (`CountUp`).
 - **Current Goal:** A polished, responsive, *animated* editorial site. Home is a slim landing (hero, statement, 3 featured projects, approach, studio, contact); the full project list lives on `/work`. All copy/images/links are user-editable in a single file: `src/content.js`.
 

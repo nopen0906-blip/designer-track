@@ -85,7 +85,7 @@ This file serves as a shared memory between AI agents (e.g., Antigravity and Cla
 ### [2026-06-21] - Created 3D Modern House
 - **Action:** Created `ModernHouse.jsx` and updated `Scene.jsx` and `App.jsx`.
 - **Agents Involved:** Antigravity
-- **Details:** Built a procedural 3D modern house to demonstrate architectural styling for the Designer Tract website.
+- **Details:** Built a procedural 3D modern house to demonstrate architectural styling for the Designer Track website.
 
 ### [2026-06-21] - 3D Website Setup
 - **Action:** Created Vite + React app, installed Three.js and R3F. Set up standard `Scene.jsx` with a floating hotpink cube.

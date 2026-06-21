@@ -28,7 +28,7 @@ export const content = {
 
   // ---- BRAND ----
   brand: {
-    name: 'Designer Tract',
+    name: 'Designer Track',
     architect: 'Saiyed Mukhatyarali',
     role: 'Architect',
   },
@@ -137,7 +137,7 @@ export const content = {
   // ---- STUDIO / ABOUT ----
   studio: {
     label: 'The Studio',
-    title: 'Designer Tract is an architecture practice led by Saiyed Mukhatyarali.',
+    title: 'Designer Track is an architecture practice led by Saiyed Mukhatyarali.',
     body: 'Founded on the belief that good architecture is quiet, we work on a deliberately limited number of residential and cultural projects each year. Our drawings are made by hand and resolved in concrete.',
     stats: [
       { value: '20+', label: 'Years experience' },
@@ -151,7 +151,7 @@ export const content = {
     label: 'Contact',
     title: 'Have a site? Let’s talk.',
     text: 'We take on a handful of new commissions each year. Tell us about the place and the people who’ll live there.',
-    email: 'studio@designertract.com',
+    email: 'studio@designertrack.com',
     phone: '+91 8200416549',
     address: 'Studio 04, Old Mill Compound, Pune, India',
   },
