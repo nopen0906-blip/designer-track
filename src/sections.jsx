@@ -51,7 +51,7 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
+    <header className={`site-header ${scrolled ? 'is-scrolled' : ''} ${open ? 'is-open' : ''}`}>
       <Link to="/" className="brand">
         <span className="brand-mark">DT</span>
         <span className="brand-name">{content.brand.name}</span>

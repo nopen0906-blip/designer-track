@@ -428,6 +428,13 @@
     text-transform: none; letter-spacing: -0.01em; }
   .site-nav a::after { display: none; }
 
+  .site-header.is-open {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-color: transparent !important;
+  }
+
   /* keep the header bar (brand + toggle) above the overlay */
   .brand { position: relative; z-index: 60; }
   .nav-toggle { display: flex; z-index: 60; position: relative; }
