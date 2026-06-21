@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion';
 
@@ -23,6 +23,27 @@ export default function MagneticButton({ to, href, className = '', children }) {
     my.set((e.clientY - (r.top + r.height / 2)) * 0.4);
   };
   const reset = () => { mx.set(0); my.set(0); };
+
+  // Mobile: subtle magnetic shift using phone's gyroscope
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.DeviceOrientationEvent || reduce) return;
+    const coarse = window.matchMedia?.('(pointer: coarse)')?.matches;
+    if (!coarse) return; // Only use gyro on touch devices
+
+    let baseline = null;
+    const clamp = (v, n) => Math.max(-n, Math.min(n, v));
+    
+    const onOrient = (e) => {
+      if (e.gamma == null || e.beta == null) return;
+      if (!baseline) baseline = { beta: e.beta, gamma: e.gamma };
+      // Subtly shift button up to ±8px (less sensitive than hero 3D text)
+      mx.set(clamp(e.gamma - baseline.gamma, 20) / 20 * 8);
+      my.set(clamp(e.beta - baseline.beta, 20) / 20 * 8);
+    };
+
+    window.addEventListener('deviceorientation', onOrient);
+    return () => window.removeEventListener('deviceorientation', onOrient);
+  }, [mx, my, reduce]);
 
   const inner = (
     <>

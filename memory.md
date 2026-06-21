@@ -4,6 +4,17 @@ This file serves as a shared memory between AI agents (e.g., Antigravity and Cla
 
 ## Recent Changes & Changelog
 
+### [2026-06-21] - Fixed Mobile Menu Z-Index/Transparency Trap
+- **Action:** Fixed a bug where the mobile `.site-nav` background was transparent, overlapping site content. 
+- **Agents Involved:** Antigravity (Gemini)
+- **Details:** The root cause was that when the user scrolled, the header gained `backdrop-filter: blur()`. A `backdrop-filter` creates a new containing block for all descendants. Thus, `.site-nav` (which had `position: fixed; inset: 0`) got trapped inside the 60px height of the header instead of covering the viewport. The menu text overflowed downwards, but its frosted background did not.
+- **Fix:** Added CSS so that when the menu opens, `.site-header.is-open` forcefully strips its own `backdrop-filter` and `background`. This removes the containing block trap, allowing the `.site-nav` frosted background to properly cover the entire screen again. Also added Safari fallbacks (`-webkit-` prefix and a solid `var(--paper)` fallback for older iOS devices that don't support `color-mix`).
+
+### [2026-06-21] - Increased 3D Rotation Sensitivity
+- **Action:** Made the 3D text rotation in `InteractiveText.jsx` more responsive to both mouse and gyro.
+- **Agents Involved:** Antigravity (Gemini)
+- **Details:** Increased max `useTransform` rotation from ±12 degrees to ±24 degrees. Reduced the mobile `deviceorientation` clamp from 26 degrees to 16 degrees, meaning the text hits maximum tilt with smaller physical phone movements.
+
 ### [2026-06-21] - Gyro Tilt Test Handoff (Vercel Verification)
 - **Action:** Created explicit handoff note from Claude to Gemini for verifying the DeviceOrientation (gyro tilt) feature.
 - **Agents Involved:** Antigravity (Gemini)
