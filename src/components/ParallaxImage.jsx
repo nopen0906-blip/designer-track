@@ -11,6 +11,7 @@ export default function ParallaxImage({
   range = 8,        // how far it drifts, in % of image height
   hover = false,    // enable hover zoom (for project cards)
   eager = false,
+  onClick = null,
 }) {
   const ref = useRef(null);
   const reduce = useReducedMotion();
@@ -28,7 +29,8 @@ export default function ParallaxImage({
       alt={alt}
       loading={eager ? 'eager' : 'lazy'}
       className={`media-img ${imgClass}`}
-      style={{ y: reduce ? 0 : y }}
+      style={{ y: reduce ? 0 : y, cursor: onClick ? 'pointer' : 'auto' }}
+      onClick={onClick}
       whileHover={hover && !reduce ? { scale: 1.06 } : undefined}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
     />

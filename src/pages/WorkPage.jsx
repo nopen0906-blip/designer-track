@@ -1,11 +1,14 @@
+import { useState } from 'react';
 import { content } from '../content';
 import { useReveal } from '../sections';
 import ParallaxImage from '../components/ParallaxImage';
+import Lightbox from '../components/Lightbox';
 
 export default function WorkPage() {
   useReveal();
   const { workPage, work } = content;
   const projects = work.projects;
+  const [lightboxImg, setLightboxImg] = useState(null);
 
   return (
     <section className="workpage">
@@ -19,7 +22,7 @@ export default function WorkPage() {
         {projects.map((p) => (
           <article className="card reveal" key={p.no}>
             <figure className="card-img media-frame">
-              <ParallaxImage src={p.image} alt={p.name} hover range={6} />
+              <ParallaxImage src={p.image} alt={p.name} hover range={6} onClick={() => setLightboxImg(p.image)} />
               <span className="card-no">{p.no}</span>
             </figure>
             <div className="card-body">
@@ -29,6 +32,7 @@ export default function WorkPage() {
           </article>
         ))}
       </div>
+      <Lightbox image={lightboxImg} onClose={() => setLightboxImg(null)} />
     </section>
   );
 }

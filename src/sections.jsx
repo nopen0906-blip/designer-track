@@ -5,6 +5,7 @@ import InteractiveText from './components/InteractiveText';
 import ParallaxImage from './components/ParallaxImage';
 import MagneticButton from './components/MagneticButton';
 import CountUp from './components/CountUp';
+import Lightbox from './components/Lightbox';
 
 /* Reveal-on-scroll: adds .is-visible when an element enters the viewport.
    Call this inside each page so freshly-mounted .reveal elements get observed. */
@@ -125,6 +126,7 @@ export function Statement() {
    projects, and reused for any list of projects passed in. */
 export function WorkShowcase({ projects, showViewAll = false }) {
   const { work } = content;
+  const [lightboxImg, setLightboxImg] = useState(null);
   return (
     <section className="work" id="work">
       <div className="section-head reveal">
@@ -136,7 +138,7 @@ export function WorkShowcase({ projects, showViewAll = false }) {
         {projects.map((p, i) => (
           <article className={`feature reveal ${i % 2 ? 'feature--flip' : ''}`} key={p.no}>
             <figure className="feature-img media-frame">
-              <ParallaxImage src={p.image} alt={p.name} hover range={7} />
+              <ParallaxImage src={p.image} alt={p.name} hover range={7} onClick={() => setLightboxImg(p.image)} />
             </figure>
             <div className="feature-body">
               <span className="feature-no">{p.no}</span>
@@ -154,6 +156,7 @@ export function WorkShowcase({ projects, showViewAll = false }) {
           </MagneticButton>
         </div>
       )}
+      <Lightbox image={lightboxImg} onClose={() => setLightboxImg(null)} />
     </section>
   );
 }

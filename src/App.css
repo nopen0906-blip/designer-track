@@ -404,6 +404,29 @@
 /* Stat numbers carry a soft warm glow */
 .stat-value { filter: drop-shadow(0 6px 22px rgba(216, 171, 84, 0.28)); }
 
+/* ------------------------------------------------------------- LIGHTBOX --- */
+.lightbox-overlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(10, 8, 6, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: grid; place-items: center;
+  padding: clamp(1.5rem, 5vw, 4rem);
+  cursor: zoom-out;
+}
+.lightbox-close {
+  position: absolute; top: clamp(1rem, 3vw, 2rem); right: clamp(1rem, 3vw, 2rem);
+  z-index: 101; background: rgba(255, 255, 255, 0.1); border: none; border-radius: 50%;
+  width: 44px; height: 44px; display: grid; place-items: center; color: var(--paper);
+  cursor: pointer; transition: background 0.3s;
+}
+.lightbox-close:hover { background: rgba(255, 255, 255, 0.2); }
+.lightbox-img {
+  max-width: 100%; max-height: 100%; object-fit: contain;
+  box-shadow: 0 40px 80px -20px rgba(0,0,0,0.6); border-radius: 4px;
+  cursor: auto;
+}
+
 /* ------------------------------------------------------------ RESPONSIVE --- */
 @media (max-width: 920px) {
   .practice-grid { grid-template-columns: repeat(2, 1fr); }
