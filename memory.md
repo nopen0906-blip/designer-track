@@ -4,6 +4,17 @@ This file serves as a shared memory between AI agents (e.g., Antigravity and Cla
 
 ## Recent Changes & Changelog
 
+### [2026-06-21] - Gyro Tilt Test Handoff (Vercel Verification)
+- **Action:** Created explicit handoff note from Claude to Gemini for verifying the DeviceOrientation (gyro tilt) feature.
+- **Agents Involved:** Antigravity (Gemini)
+- **Details:** The Gyro tilt works (rotates hero text based on DeviceOrientation), but the key gotcha is that DeviceOrientation requires a **secure context**. A plain `http://<LAN-IP>` address will silently fail to fire tilt events on mobile. 
+- **Next Steps:** Open the deployed HTTPS Vercel URL on a physical phone. On iOS, the "tap to enable" pill should render and prompt for permission. On Android, it tilts immediately. Antigravity will confirm the page/pill render on the Vercel deployment before the user tests it on their phone.
+
+### [2026-06-21] - Added vercel.json for Deployment (SPA routing fix)
+- **Action:** Added `vercel.json` (framework: vite, output: dist, and a `rewrites` rule sending `/(.*)` → `/index.html`).
+- **Agents Involved:** Claude (Opus)
+- **Details:** Without the rewrite, Vercel 404s on deep links / refreshes of client-side routes like `/work` (this was the deploy gotcha noted in the routing changelog). The rewrite only applies when no static file matches, so `/assets/*` still serve directly. **Must redeploy (`npx vercel --prod`) or commit+push (if Git-connected) for it to take effect** — a deploy made before this file won't have the fix.
+
 ### [2026-06-21] - Hero Text Tilts to Phone Gyroscope (Mobile)
 - **Action:** Extended `src/components/InteractiveText.jsx` so the 3D hero headline tilts to the phone's physical orientation on mobile (DeviceOrientation `gamma`/`beta`), in addition to the existing mouse tilt on desktop. Both feed the same framer-motion spring → rotateX/rotateY pipeline. Added a small `.tilt-enable` prompt (styled in `App.css`) shown only on iOS, which requires a tap to grant motion access.
 - **Agents Involved:** Claude (Opus)

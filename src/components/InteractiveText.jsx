@@ -8,8 +8,8 @@ export default function InteractiveText({ lines }) {
   const y = useMotionValue(0);
   const smoothX = useSpring(x, { stiffness: 100, damping: 20 });
   const smoothY = useSpring(y, { stiffness: 100, damping: 20 });
-  const rotateX = useTransform(smoothY, [-1, 1], [12, -12]);
-  const rotateY = useTransform(smoothX, [-1, 1], [-12, 12]);
+  const rotateX = useTransform(smoothY, [-1, 1], [24, -24]);
+  const rotateY = useTransform(smoothX, [-1, 1], [-24, 24]);
 
   // iOS 13+ requires an explicit tap to grant motion access; this drives the prompt.
   const [needsPermission, setNeedsPermission] = useState(false);
@@ -37,8 +37,8 @@ export default function InteractiveText({ lines }) {
       // first reading = the "rest" pose, so tilt is measured relative to how
       // the person is naturally holding the phone.
       if (!baseline) baseline = { beta: e.beta, gamma: e.gamma };
-      x.set(clamp(e.gamma - baseline.gamma, 26) / 26); // left / right tilt
-      y.set(clamp(e.beta - baseline.beta, 26) / 26);   // forward / back tilt
+      x.set(clamp(e.gamma - baseline.gamma, 16) / 16); // left / right tilt
+      y.set(clamp(e.beta - baseline.beta, 16) / 16);   // forward / back tilt
     };
 
     const DOE = window.DeviceOrientationEvent;

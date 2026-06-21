@@ -27,6 +27,7 @@ This file provides the global context and current state of the repository for AI
 - [x] Replaced the "Approach" process steps with a professional Capabilities section — "This is the work we do." (6 services). Section is now `Practice` / `content.practice` / `#practice`; fixed the per-word wrap bug from the old 5-column layout.
 - [x] QA pass: removed `Type` metadata from project showcase + work cards; fixed mobile nav (full-screen glass overlay, `html { overflow-x: clip }`) — verified no horizontal overflow via CDP device emulation.
 - [x] Hero headline now tilts to the phone's gyroscope on mobile (DeviceOrientation), alongside the desktop mouse tilt. iOS shows a one-tap "enable motion" prompt; needs HTTPS to test on a real device.
+- [ ] **Handoff / Verification:** Verify the Gyro tilt effect on a physical phone over the deployed HTTPS Vercel URL. (iOS requires tapping the "enable motion" pill). Agent to confirm the page/pill render via browser before user tests on phone.
 
 ---
 *Note for AI Agents: Please update the "Active Tasks" and "Project Overview" sections as the project evolves.*
