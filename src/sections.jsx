@@ -41,6 +41,15 @@ export function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [open]);
+
   return (
     <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
       <Link to="/" className="brand">
