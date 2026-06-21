@@ -22,7 +22,7 @@ export default function WorkPage() {
         {projects.map((p) => (
           <article className="card reveal" key={p.no}>
             <figure className="card-img media-frame">
-              <ParallaxImage src={p.image} alt={p.name} hover range={6} onClick={() => setLightboxImg(p.image)} />
+              <ParallaxImage src={p.image} alt={p.name} hover range={0} onClick={() => setLightboxImg(p.image)} />
               <span className="card-no">{p.no}</span>
             </figure>
             <div className="card-body">

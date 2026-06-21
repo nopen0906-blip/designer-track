@@ -166,7 +166,7 @@
     linear-gradient(180deg, transparent 56%, rgba(22, 17, 13, 0.32) 100%);
 }
 .media-img {
-  display: block; width: 100%; height: 128%; object-fit: cover;
+  display: block; width: 100%; height: auto; object-fit: contain;
   will-change: transform; backface-visibility: hidden;
   filter: saturate(1.06) contrast(1.04) brightness(0.99);
 }
@@ -176,6 +176,7 @@
 .feature-img:hover, .card:hover .card-img { box-shadow: var(--shadow-lift); }
 
 .hero-media { height: clamp(280px, 56vh, 640px); }
+.hero-media .media-img { height: 128%; object-fit: cover; }
 .hero-img { filter: saturate(1.05) contrast(1.04); }
 .hero-figure figcaption {
   display: flex; align-items: center; gap: 1rem; margin-top: 0.9rem;
@@ -206,7 +207,7 @@
   border-top: 1px solid var(--line);
 }
 .feature--flip .feature-img { order: 2; }
-.feature-img { overflow: hidden; height: clamp(320px, 48vw, 560px); }
+.feature-img { overflow: hidden; height: auto; }
 .feature-img .media-img { filter: contrast(1.02); cursor: pointer; }
 .feature-no {
   font-family: var(--mono); font-size: 0.8rem; color: var(--clay); letter-spacing: 0.1em;
@@ -239,7 +240,7 @@
   gap: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 3vw, 2.5rem); }
 .card { display: flex; flex-direction: column; }
 .card-img { position: relative; overflow: hidden;
-  height: clamp(260px, 34vw, 440px); margin-bottom: 1.4rem; }
+  height: auto; margin-bottom: 1.4rem; }
 .card-no { position: absolute; top: 1rem; left: 1rem; z-index: 2;
   font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; color: var(--paper);
   background: rgba(27, 23, 20, 0.55); backdrop-filter: blur(4px);
@@ -311,6 +312,7 @@
 }
 .studio > * { position: relative; z-index: 1; }
 .studio-img { overflow: hidden; min-height: 420px; }
+.studio-img .media-img { height: 128%; object-fit: cover; }
 .studio-media { filter: saturate(1.05) contrast(1.07) brightness(0.96); }
 .studio-body { padding: clamp(3rem, 7vw, 6.5rem) var(--pad); align-self: center; }
 .studio .section-label { color: var(--gold); }

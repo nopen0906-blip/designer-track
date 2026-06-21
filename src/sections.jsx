@@ -138,7 +138,7 @@ export function WorkShowcase({ projects, showViewAll = false }) {
         {projects.map((p, i) => (
           <article className={`feature reveal ${i % 2 ? 'feature--flip' : ''}`} key={p.no}>
             <figure className="feature-img media-frame">
-              <ParallaxImage src={p.image} alt={p.name} hover range={7} onClick={() => setLightboxImg(p.image)} />
+              <ParallaxImage src={p.image} alt={p.name} hover range={0} onClick={() => setLightboxImg(p.image)} />
             </figure>
             <div className="feature-body">
               <span className="feature-no">{p.no}</span>

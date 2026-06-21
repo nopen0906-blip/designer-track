@@ -1,7 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Lightbox({ image, onClose }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   // Lock body scroll when lightbox is open
   useEffect(() => {
     if (image) {
@@ -12,7 +16,9 @@ export default function Lightbox({ image, onClose }) {
     return () => { document.body.style.overflow = ''; };
   }, [image]);
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {image && (
         <motion.div
@@ -42,6 +48,7 @@ export default function Lightbox({ image, onClose }) {
           />
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }
