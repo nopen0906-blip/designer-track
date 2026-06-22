@@ -3,6 +3,7 @@ import { content } from '../content';
 import { useReveal } from '../sections';
 import ParallaxImage from '../components/ParallaxImage';
 import Lightbox from '../components/Lightbox';
+import Card3D from '../components/Card3D';
 
 export default function WorkPage() {
   useReveal();
@@ -20,7 +21,7 @@ export default function WorkPage() {
 
       <div className="work-grid">
         {projects.map((p) => (
-          <article className="card reveal" key={p.no}>
+          <Card3D className="card reveal" key={p.no}>
             <figure className="card-img media-frame">
               <ParallaxImage src={p.image} alt={p.name} hover range={0} onClick={() => setLightboxImg(p.image)} />
               <span className="card-no">{p.no}</span>
@@ -29,7 +30,7 @@ export default function WorkPage() {
               <h2 className="card-name">{p.name}</h2>
               <p className="card-blurb">{p.blurb}</p>
             </div>
-          </article>
+          </Card3D>
         ))}
       </div>
       <Lightbox image={lightboxImg} onClose={() => setLightboxImg(null)} />

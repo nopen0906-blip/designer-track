@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import { content } from './content';
 import InteractiveText from './components/InteractiveText';
@@ -6,6 +6,11 @@ import ParallaxImage from './components/ParallaxImage';
 import MagneticButton from './components/MagneticButton';
 import CountUp from './components/CountUp';
 import Lightbox from './components/Lightbox';
+import Card3D from './components/Card3D';
+
+/* The 3D hero pulls in Three.js (~600 KB). Lazy-load it so it splits into its
+   own chunk and never blocks first paint of the page shell / hero text. */
+const HeroScene = lazy(() => import('./components/HeroScene'));
 
 /* Reveal-on-scroll: adds .is-visible when an element enters the viewport.
    Call this inside each page so freshly-mounted .reveal elements get observed. */
@@ -99,15 +104,15 @@ export function Hero() {
         </div>
       </div>
 
-      <figure className="hero-figure reveal">
-        <div className="hero-media media-frame">
-          <ParallaxImage src={hero.image} alt={hero.imageCaption} imgClass="hero-img" range={10} eager />
-        </div>
-        <figcaption>
+      <div className="hero-scene" aria-hidden="true">
+        <Suspense fallback={null}>
+          <HeroScene />
+        </Suspense>
+        <div className="hero-scene-caption">
           <span className="sheet">SHT. 01</span>
-          {hero.imageCaption}
-        </figcaption>
-      </figure>
+          <span>Architectural Composition — 3D</span>
+        </div>
+      </div>
     </section>
   );
 }
@@ -136,7 +141,7 @@ export function WorkShowcase({ projects, showViewAll = false }) {
 
       <div className="features">
         {projects.map((p, i) => (
-          <article className={`feature reveal ${i % 2 ? 'feature--flip' : ''}`} key={p.no}>
+          <Card3D className={`feature reveal ${i % 2 ? 'feature--flip' : ''}`} key={p.no}>
             <figure className="feature-img media-frame">
               <ParallaxImage src={p.image} alt={p.name} hover range={0} onClick={() => setLightboxImg(p.image)} />
             </figure>
@@ -145,7 +150,7 @@ export function WorkShowcase({ projects, showViewAll = false }) {
               <h3 className="feature-name">{p.name}</h3>
               <p className="feature-blurb">{p.blurb}</p>
             </div>
-          </article>
+          </Card3D>
         ))}
       </div>
 

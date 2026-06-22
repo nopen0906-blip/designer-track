@@ -2,14 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..600&family=Space+Grotesk:wght@300..700&family=Space+Mono:wght@400;700&display=swap');
 
 :root {
-  /* ---- Base canvas: warm graded ivory & deep espresso ---- */
-  --paper:    #f1ebdf;
-  --paper-2:  #e8e0d0;
-  --paper-hi: #f7f2e9;   /* lightest highlight tone for gradients */
-  --ink:      #16110d;   /* deep, warm espresso-black */
-  --ink-2:    #241b14;   /* lifted espresso for dark gradients */
-  --ink-soft: #50473d;
-  --stone:    #8a8174;
+  /* ---- Dark Gallery Luxe: obsidian canvas, ivory ink, brass-gold accents ---- */
+  --paper:    #0e0c0b;   /* obsidian — page background */
+  --paper-2:  #17130f;   /* espresso — panels, cards, dark bands, hovers */
+  --paper-hi: #1c1712;   /* lifted espresso — gradient highlight tone */
+  --ink:      #f3ecdf;   /* ivory — primary text */
+  --ink-2:    #fbf7ee;   /* brightest ivory */
+  --ink-soft: #b6ab99;   /* muted warm-ivory — body copy on dark */
+  --stone:    #8a8174;   /* muted stone — labels & hairline text */
 
   /* ---- Accent ramp: terracotta → amber → gold (the "metal" of the brand) ---- */
   --clay:    #b9532a;
@@ -18,23 +18,23 @@
   --gold:    #d8ab54;
   --sage:    #6f7d6a;   /* cool counterpoint, used only in ambient glows */
 
-  /* ---- Hairlines ---- */
-  --line:    rgba(34, 25, 17, 0.16);
-  --line-2:  rgba(34, 25, 17, 0.07);
+  /* ---- Hairlines (light on dark) ---- */
+  --line:    rgba(243, 236, 223, 0.14);
+  --line-2:  rgba(243, 236, 223, 0.07);
 
   /* ---- Gradients ---- */
   --grad-warm: linear-gradient(115deg, var(--clay) 0%, var(--amber) 55%, var(--gold) 100%);
-  --grad-ink:  linear-gradient(165deg, #2a2017 0%, #16110d 58%, #100b08 100%);
+  --grad-ink:  linear-gradient(165deg, #1d1813 0%, #0e0c0b 60%, #0a0807 100%);
   --grad-hair: linear-gradient(90deg, transparent, var(--clay) 18%, var(--gold) 50%, var(--clay) 82%, transparent);
 
-  /* ---- Ambient light blooms (radial) ---- */
-  --glow-clay:  rgba(185, 83, 42, 0.20);
+  /* ---- Ambient light blooms (radial) — richer against the dark ---- */
+  --glow-clay:  rgba(185, 83, 42, 0.22);
   --glow-amber: rgba(216, 171, 84, 0.20);
-  --glow-sage:  rgba(111, 125, 106, 0.14);
+  --glow-sage:  rgba(111, 125, 106, 0.10);
 
-  /* ---- Soft luxury (diffused, warm) shadows ---- */
-  --shadow-soft: 0 30px 60px -38px rgba(22, 17, 13, 0.5);
-  --shadow-lift: 0 48px 90px -42px rgba(22, 17, 13, 0.62);
+  /* ---- Deep luxury shadows (near-black) ---- */
+  --shadow-soft: 0 30px 60px -38px rgba(0, 0, 0, 0.72);
+  --shadow-lift: 0 48px 90px -42px rgba(0, 0, 0, 0.82);
 
   /* ---- Type ---- */
   --serif: 'Fraunces', Georgia, serif;
@@ -52,7 +52,7 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: clip
 
 body {
   background: var(--paper);
-  background-image: linear-gradient(180deg, var(--paper-hi) 0%, var(--paper) 42%, var(--paper-2) 100%);
+  background-image: linear-gradient(180deg, #1b1610 0%, #0e0c0b 46%, #080605 100%);
   background-attachment: fixed;
   color: var(--ink);
   font-family: var(--sans);
@@ -60,7 +60,9 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+  /* clip (not hidden): hidden forces overflow-y:auto, which makes <body> a
+     scroll container and silently breaks position:sticky on the hero. */
+  overflow-x: clip;
 }
 
 img { display: block; max-width: 100%; height: auto; }
