@@ -153,7 +153,7 @@ export const content = {
     text: 'We take on a handful of new commissions each year. Tell us about the place and the people who’ll live there.',
     email: 'designer.trackco@gmail.com',
     phone: '+91 8200416549',
-    address: 'Studio 04, Old Mill Compound, Pune, India',
+    address: 'Danilimbda Kalapi Complex, Near Danilimbda Circle, Ahmedabad',
   },
 
   // ---- FOOTER ----

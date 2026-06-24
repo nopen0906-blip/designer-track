@@ -1,4 +1,4 @@
-import { useEffect, useState, Suspense, lazy } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { content } from './content';
 import InteractiveText from './components/InteractiveText';
@@ -8,9 +8,6 @@ import CountUp from './components/CountUp';
 import Lightbox from './components/Lightbox';
 import Card3D from './components/Card3D';
 
-/* The 3D hero pulls in Three.js (~600 KB). Lazy-load it so it splits into its
-   own chunk and never blocks first paint of the page shell / hero text. */
-const HeroScene = lazy(() => import('./components/HeroScene'));
 
 /* Reveal-on-scroll: adds .is-visible when an element enters the viewport.
    Call this inside each page so freshly-mounted .reveal elements get observed. */
@@ -104,15 +101,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="hero-scene" aria-hidden="true">
-        <Suspense fallback={null}>
-          <HeroScene />
-        </Suspense>
-        <div className="hero-scene-caption">
-          <span className="sheet">SHT. 01</span>
-          <span>Architectural Composition — 3D</span>
-        </div>
-      </div>
+
     </section>
   );
 }

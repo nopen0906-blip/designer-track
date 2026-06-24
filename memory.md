@@ -4,6 +4,17 @@ This file serves as a shared memory between AI agents (e.g., Antigravity and Cla
 
 ## Recent Changes & Changelog
 
+### [2026-06-24] - SETUP: Blender MCP connection (ahujasid/blender-mcp) is fully wired up
+- **Action:** Completed the Blender 3D workflow integration requested in the handoff. Verified the whole chain **Claude Code → blender-mcp (uvx) → Blender addon** is live and connected.
+- **Agents Involved:** Claude (Opus)
+- **Details / current state (all confirmed):**
+  - Repo cloned at `C:\Users\Admin\Desktop\blender-mcp` (contains `addon.py`, `src/`, `main.py`, `pyproject.toml`).
+  - Blender **5.1** installed at `C:\Program Files\Blender Foundation\Blender 5.1\blender.exe`; currently **running** (the addon is enabled).
+  - Addon is installed in Blender's user addons dir as `…\AppData\Roaming\Blender Foundation\Blender\5.1\scripts\addons\blender_mcp_addon.py`, and its socket server is **listening on `127.0.0.1:9876`** (BlenderMCP sidebar → "Connect to MCP server" is started).
+  - MCP server is **registered in `~/.claude.json`** as `"blender"` → `type: stdio`, `command: uvx`, `args: ["blender-mcp"]`. `claude mcp list` reports `blender: uvx blender-mcp - ✔ Connected`.
+  - Tooling present: `uv`/`uvx` 0.11.23 at `~/.local/bin`, `claude` CLI at `~/.local/bin`.
+- **Gotchas (for next agent):** (1) Two separate links exist — the `✔ Connected` in `claude mcp list` only confirms Claude↔server; the server↔Blender link needs **Blender open with the addon's "Connect to MCP server" started** (port 9876 listening). If tools error out, check Blender is running first. (2) **The blender tools only load into a Claude session that was started AFTER the server was registered** — if `mcp__blender__*` tools aren't available, restart the Claude Code session (or use `/mcp` to reconnect). (3) `uvx blender-mcp` pulls the published package, not the local clone — the clone is mainly for the `addon.py` to install into Blender.
+
 ### [2026-06-22] - PERF: optimized the glass hero (it was lagging)
 - **Action:** Client reported heavy lag. Cause: `HeroScene.jsx` used **4 separate `MeshTransmissionMaterial` slabs at `samples=6, resolution=256`** — each transmission material re-renders the whole scene into its own offscreen buffer every frame (~4 extra scene renders/frame), plus `dpr=[1,2]` (4× pixels on retina) and continuous frameloop. **Optimizations:** (1) added `transmissionSampler` so all glass shares ONE transmission buffer instead of 4; dropped to `samples=4, resolution=128`. (2) **`LOW_POWER` path** (coarse pointer / width<900 / ≤4 cores / ≤4GB mem) swaps transmission for a cheap reflective `meshStandardMaterial` (no transmission pass), `dpr=1`, `antialias=false`, env resolution 64 — keeps phones smooth. (3) `ContactShadows frames={1}` (render once). (4) desktop `dpr` capped to `[1,1.5]`. (5) removed unused Canvas `shadows`/`castShadow` and the unused EffectComposer import; `powerPreference:'high-performance'`.
 - **Agents Involved:** Claude (Opus)
