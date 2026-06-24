@@ -1,9 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import { Header, Footer } from './sections';
 import Home from './pages/Home';
 import WorkPage from './pages/WorkPage';
+
+const SamplePage = lazy(() => import('./pages/SamplePage'));
 
 /* On navigation: scroll to a #hash target if present, otherwise jump to top. */
 function ScrollManager() {
@@ -33,6 +35,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/work" element={<WorkPage />} />
+          <Route path="/sample" element={<Suspense fallback={null}><SamplePage /></Suspense>} />
         </Routes>
       </main>
       <Footer />
