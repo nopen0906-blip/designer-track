@@ -1,6 +1,6 @@
-import { useRef, useMemo, Suspense } from 'react'
+import { useRef, useMemo, Suspense, Component } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Environment, Lightformer, ContactShadows, Float } from '@react-three/drei'
+import { Environment, Lightformer, ContactShadows, Float, useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 import { hasWebGL, LOW_POWER, PREFERS_REDUCED_MOTION, useHeroScrollProgress } from './three-helpers'
 
@@ -34,6 +34,25 @@ function ProceduralVilla() {
       ))}
     </group>
   )
+}
+
+const MODEL_URL = '/models/villa.glb'
+
+// Loads the Blender villa. The plinth is modeled centred on the origin, so the
+// model is already X/Z-centred; we only lift it slightly so its base meets the
+// contact shadow.
+function VillaModel() {
+  const { scene } = useGLTF(MODEL_URL)
+  const cloned = useMemo(() => scene.clone(true), [scene])
+  return <primitive object={cloned} position={[0, 0.08, 0]} />
+}
+useGLTF.preload(MODEL_URL)
+
+// If the GLB is absent/broken, render the in-code villa instead — the page never breaks.
+class ModelBoundary extends Component {
+  constructor(p) { super(p); this.state = { failed: false } }
+  static getDerivedStateFromError() { return { failed: true } }
+  render() { return this.state.failed ? this.props.fallback : this.props.children }
 }
 
 // Procedural studio rig — gives glass/brass real reflections without an external HDRI.
@@ -99,7 +118,11 @@ export default function VillaHero() {
         <Lighting />
         <Rig scrollRef={scrollRef} sunRef={sunRef}>
           <Float speed={PREFERS_REDUCED_MOTION ? 0 : 0.8} rotationIntensity={0.06} floatIntensity={0.25}>
-            <ProceduralVilla />
+            <ModelBoundary fallback={<ProceduralVilla />}>
+              <Suspense fallback={<ProceduralVilla />}>
+                <VillaModel />
+              </Suspense>
+            </ModelBoundary>
           </Float>
           <ContactShadows position={[0, -0.74, 0]} opacity={0.55} scale={12} blur={2.6} far={5} color="#000000" frames={1} />
         </Rig>
