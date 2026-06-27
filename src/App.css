@@ -103,13 +103,7 @@
 .hero-scene canvas {
   flex: 1; min-height: 0;
 }
-.hero-scene-caption {
-  position: absolute; bottom: 2rem; left: 1.5rem;
-  display: flex; align-items: center; gap: 1rem;
-  font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em;
-  text-transform: uppercase; color: var(--ink-soft); z-index: 10;
-  pointer-events: none;
-}
+
 /* Quiet blueprint-toned panel shown when WebGL is unavailable */
 .hero-scene-fallback {
   flex: 1; min-height: 0; border-radius: 4px;
