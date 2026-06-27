@@ -4,6 +4,11 @@ This file serves as a shared memory between AI agents (e.g., Antigravity and Cla
 
 ## Recent Changes & Changelog
 
+### [2026-06-27] - FIX: Live-site content fixes + redeploy
+- **Action:** Executed HANDOFF_LIVE_FIXES.md. Verified contact address and removed unused `.sheet` CSS rule as the old HeroScene with its caption was already deleted. Verified `VillaHero.jsx` didn't have leftover captions.
+- **Agents Involved:** Antigravity (Gemini)
+- **Details:** Built via `npm run build`. Deployed via `git push` to trigger Vercel auto-deploy.
+
 ### [2026-06-24] - SETUP: Blender MCP connection (ahujasid/blender-mcp) is fully wired up
 - **Action:** Completed the Blender 3D workflow integration requested in the handoff. Verified the whole chain **Claude Code → blender-mcp (uvx) → Blender addon** is live and connected.
 - **Agents Involved:** Claude (Opus)

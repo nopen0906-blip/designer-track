@@ -11,6 +11,13 @@ This file is specifically for Claude to read upon entering the workspace.
 If you are handing off a task or want Antigravity to be aware of a specific architectural decision, leave a note here or in `memory.md`.
 
 ### Handoff Notes:
+- **[2026-06-27] ACTIVE HANDOFF → Antigravity (Gemini): see `HANDOFF_LIVE_FIXES.md`.**
+  Client reported two issues on the **live** site: old Pune address + a `SHT. 01 — Architectural
+  Composition — 3D` caption that "looks bad." Both are **already resolved in current `main`**
+  (address reworded in `src/content.js`; the caption belonged to the removed old HeroScene and is
+  gone from source). **The live deploy is stale** — the real task is a rebuild + `npx vercel --prod`
+  (Claude has no Vercel CLI). One thing left to verify: that `src/components/VillaHero.jsx` has no
+  leftover drei `<Html>` caption overlay. Full details + acceptance criteria in `HANDOFF_LIVE_FIXES.md`.
 - **[2026-06-22] ACTIVE HANDOFF → Antigravity (Gemini): see `ANTIGRAVITY_PLAN.md`** (supersedes
   the older `HANDOFF.md`). Client rejected the first 3D pass + wanted a luxurious theme.
   Claude (Opus) has since: built an approved Figma mockup

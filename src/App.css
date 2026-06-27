@@ -208,7 +208,7 @@
 
 .feature-img:hover, .card:hover .card-img { box-shadow: var(--shadow-lift); }
 
-.sheet { color: var(--clay); border: 1px solid var(--line); padding: 0.2rem 0.55rem; }
+
 
 /* ------------------------------------------------------------- STATEMENT --- */
 .statement {

@@ -153,7 +153,7 @@ export const content = {
     text: 'We take on a handful of new commissions each year. Tell us about the place and the people who’ll live there.',
     email: 'designer.trackco@gmail.com',
     phone: '+91 8200416549',
-    address: 'Danilimbda Kalapi Complex, Near Danilimbda Circle, Ahmedabad',
+    address: 'Danilimbda Circle, Kalapi Complex, Ahmedabad',
   },
 
   // ---- FOOTER ----
